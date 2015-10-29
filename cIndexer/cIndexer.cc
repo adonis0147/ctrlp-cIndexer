@@ -7,24 +7,27 @@
 #include <algorithm>
 #include <regex>
 
-#ifdef __unix__
-#include <dirent.h>
-#elif _WIN32
+#if _WIN32
 #include "dirent.h"
+#else
+#include <dirent.h>
 #endif
 
-static std::vector<std::string> Scan(const std::string &root, const std::string &pattern) {
+static std::vector<std::string> Scan(const std::string &directory, const std::string &pattern) {
   std::queue<std::string> paths;
   std::vector<std::string> files;
   std::regex filter(pattern);
-  paths.push(root);
+  paths.push(directory);
+  std::string root = "";
+  if (directory != "/") root = directory;
   struct dirent *entry;
 
   while (!paths.empty()) {
-    const std::string path = paths.front();
+    std::string path = paths.front();
     paths.pop();
 
     DIR *dir = opendir(path.c_str());
+    if (path == "/") path = "";
     if (dir) {
       while ((entry = readdir(dir)) != NULL) {
         const char *file_name = entry->d_name;
