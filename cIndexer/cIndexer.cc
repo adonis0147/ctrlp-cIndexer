@@ -9,10 +9,8 @@
 
 #ifdef __unix__
 #include <dirent.h>
-#define ISDIR(type) (type == DT_DIR)
-#elif __WIN32
+#elif _WIN32
 #include "dirent.h"
-#define ISDIR(type) (S_ISDIR(type))
 #endif
 
 static std::vector<std::string> Scan(const std::string &root, const std::string &pattern) {
@@ -35,7 +33,7 @@ static std::vector<std::string> Scan(const std::string &root, const std::string 
         if (file_name[0] == '.')
           continue;
         const std::string full_path = path + "/" + file_name;
-        if (ISDIR(entry->d_type)) {
+        if (entry->d_type == DT_DIR) {
           paths.push(full_path);
         } else {
           if (!regex_match(full_path, filter)) {
