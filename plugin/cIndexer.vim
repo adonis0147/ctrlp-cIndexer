@@ -5,7 +5,10 @@ import vim
 import sys
 import os
 sys.path.insert(0, os.path.abspath(vim.eval('s:plugin_path')))
-import cIndexer
+try:
+    import cIndexer
+except:
+    print('Error: Module cIndexer missing!')
 sys.path.pop(0)
 EOF
 
