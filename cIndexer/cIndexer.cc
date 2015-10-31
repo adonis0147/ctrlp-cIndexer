@@ -13,13 +13,11 @@
 #include <dirent.h>
 #endif
 
-static std::vector<std::string> Scan(const std::string &directory, const std::string &pattern) {
+static std::vector<std::string> Scan(const std::string &root, const std::string &pattern) {
   std::queue<std::string> paths;
   std::vector<std::string> files;
   std::regex filter(pattern);
-  paths.push(directory);
-  std::string root = "";
-  if (directory != "/") root = directory;
+  paths.push(root);
   struct dirent *entry;
 
   while (!paths.empty()) {
@@ -27,7 +25,6 @@ static std::vector<std::string> Scan(const std::string &directory, const std::st
     paths.pop();
 
     DIR *dir = opendir(path.c_str());
-    if (path == "/") path = "";
     if (dir) {
       while ((entry = readdir(dir)) != NULL) {
         const char *file_name = entry->d_name;
