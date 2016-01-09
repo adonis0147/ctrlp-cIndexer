@@ -1,41 +1,25 @@
 diff --git a/autoload/ctrlp.vim b/autoload/ctrlp.vim
-index 19ac146..ae40cac 100644
+index 19ac146..f2cd353 100644
 --- a/autoload/ctrlp.vim
 +++ b/autoload/ctrlp.vim
-@@ -337,35 +337,7 @@ fu! s:Reset(args)
- endf
- " * Files {{{1
- fu! ctrlp#files()
--	let cafile = ctrlp#utils#cachefile()
--	if g:ctrlp_newcache || !filereadable(cafile) || s:nocache(cafile)
--		let [lscmd, s:initcwd, g:ctrlp_allfiles] = [s:lsCmd(), s:dyncwd, []]
--		" Get the list of files
--		if empty(lscmd)
--			if !ctrlp#igncwd(s:dyncwd)
+@@ -343,18 +343,14 @@ fu! ctrlp#files()
+ 		" Get the list of files
+ 		if empty(lscmd)
+ 			if !ctrlp#igncwd(s:dyncwd)
 -				cal s:GlobPath(s:fnesc(s:dyncwd, 'g', ','), 0)
--			en
--		el
--			sil! cal ctrlp#progress('Indexing...')
--			try | cal s:UserCmd(lscmd)
--			cat | retu [] | endt
--		en
++				echo 'Using cIndexer to index files ...'
++				call cIndexer#Index(s:fnesc(s:dyncwd, 'g', ','))
+ 			en
+ 		el
+ 			sil! cal ctrlp#progress('Indexing...')
+ 			try | cal s:UserCmd(lscmd)
+ 			cat | retu [] | endt
+ 		en
 -		" Remove base directory
 -		cal ctrlp#rmbasedir(g:ctrlp_allfiles)
 -		if len(g:ctrlp_allfiles) <= s:compare_lim
 -			cal sort(g:ctrlp_allfiles, 'ctrlp#complen')
 -		en
--		cal s:writecache(cafile)
--		let catime = getftime(cafile)
--	el
--		let catime = getftime(cafile)
--		if !( exists('s:initcwd') && s:initcwd == s:dyncwd )
--			\ || get(s:ficounts, s:dyncwd, [0, catime])[1] != catime
--			let s:initcwd = s:dyncwd
--			let g:ctrlp_allfiles = ctrlp#utils#readfile(cafile)
--		en
--	en
--	cal extend(s:ficounts, { s:dyncwd : [len(g:ctrlp_allfiles), catime] })
-+	call cIndexer#Index(s:fnesc(s:dyncwd, 'g', ','))
- 	retu g:ctrlp_allfiles
- endf
- 
+ 		cal s:writecache(cafile)
+ 		let catime = getftime(cafile)
+ 	el
