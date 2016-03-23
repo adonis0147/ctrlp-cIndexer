@@ -8,6 +8,6 @@ python setup.py build
 target=`find . | grep -P 'cIndexer.(so|dll|pyd)'`
 mv $target ../plugin
 
-cd ~/.vim/bundle/ctrlp.vim/
+cd $root/../ctrlp.vim/
 git apply $root/ctrlp.patch
 
