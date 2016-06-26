@@ -6,7 +6,7 @@ ignore_extensions = vim.eval('s:ignore_extensions')
 ignore_pattern = r'^.+\.(%s)$' % ('|'.join(ignore_extensions))
 root = vim.eval('a:dir')
 files = cIndexer.scan(root, ignore_pattern)
-vim.command('let g:ctrlp_allfiles = %s' % files)
+vim.command('let g:ctrlp_allfiles = split("%s")' % ' '.join(files))
 EOF
 endfunction
 
