@@ -6,6 +6,7 @@
 #include <queue>
 #include <algorithm>
 #include <regex>
+#include <sstream>
 
 #if _WIN32
 #include "dirent.h"
@@ -59,11 +60,11 @@ static PyObject *Scan(PyObject *self, PyObject *args) {
   else
     files = Scan(root);
   std::sort(files.begin(), files.end());
-  PyObject *result = PyList_New(files.size());
+  std::ostringstream result;
   for (size_t i = 0; i < files.size(); ++ i) {
-    PyList_SetItem(result, i, Py_BuildValue("s", files[i].c_str()));
+    result << files[i] << " ";
   }
-  return result;
+  return Py_BuildValue("s", result.str().c_str());
 }
 
 static PyMethodDef cIndexerMethods[] = {
