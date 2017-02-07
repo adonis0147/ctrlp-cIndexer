@@ -52,7 +52,7 @@ static std::vector<std::string> Scan(const std::string &root, const std::string 
 static PyObject *Scan(PyObject *self, PyObject *args) {
 	const char *root;
 	char *file_pattern = "^$";
-	char *dir_pattern = "";
+	char *dir_pattern = "^$";
 	if (!PyArg_ParseTuple(args, "s|ss", &root, &file_pattern, &dir_pattern)) return NULL;
 
 	std::vector<std::string> files;

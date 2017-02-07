@@ -11,7 +11,7 @@
 #include <vector>
 #include <string>
 
-static std::vector<std::string> Scan(const std::string &root, const std::string &file_pattern = "^$", const std::string &dir_pattern = "");
+static std::vector<std::string> Scan(const std::string &root, const std::string &file_pattern = "^$", const std::string &dir_pattern = "^$");
 static PyObject *Scan(PyObject *self, PyObject *args);
 
 #ifdef _DEBUG_WAS_DEFINED
