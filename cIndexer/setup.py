@@ -1,7 +1,7 @@
 from distutils.core import setup, Extension
 
 module = Extension('cIndexer', sources = ['cIndexer.cc'],
-                   extra_compile_args = ['--std=c++11'])
+                   extra_compile_args = ['--std=c++11', '-Wno-write-strings'])
 
 setup(name = 'cIndexer',
       version = '0.1',
