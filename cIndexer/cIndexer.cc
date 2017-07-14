@@ -60,7 +60,7 @@ static PyObject *Scan(PyObject *self, PyObject *args) {
 	std::sort(files.begin(), files.end());
 	std::ostringstream result;
 	for (size_t i = 0; i < files.size(); ++ i) {
-		result << files[i] << " ";
+		result << files[i] << "\n";
 	}
 	return Py_BuildValue("s", result.str().c_str());
 }

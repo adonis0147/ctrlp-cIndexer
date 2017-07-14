@@ -11,7 +11,7 @@ ignore_dir_pattern = r'/(%s)$' % ('|'.join(ignore_directories))
 root = '/'.join(os.path.split(vim.eval('a:dir')))
 result = cIndexer.scan(root, ignore_file_pattern, ignore_dir_pattern)
 encoding = locale.getdefaultlocale()[-1]
-vim.command('let g:ctrlp_allfiles = split("%s")' % result.decode(encoding))
+vim.command('let g:ctrlp_allfiles = split("%s", "\n")' % result.decode(encoding, 'ignore'))
 EOF
 endfunction
 
