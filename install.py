@@ -5,7 +5,7 @@ import os
 import glob
 import shutil
 
-os.system('cd cIndexer && python setup.py install')
+os.system('cd cIndexer && python setup.py build')
 
 extensions = ['*.so', '*.pyd', '*.dll']
 path = './cIndexer/build/*'
