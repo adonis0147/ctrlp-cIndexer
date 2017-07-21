@@ -12,6 +12,7 @@ root = '/'.join(os.path.split(vim.eval('a:dir')))
 result = cIndexer.scan(root, ignore_file_pattern, ignore_dir_pattern)
 encoding = locale.getdefaultlocale()[-1]
 vim.command('let g:ctrlp_allfiles = split("%s", "\n")' % result.decode(encoding, 'ignore'))
+vim.command('call add(g:ctrlp_allfiles, "")')
 EOF
 endfunction
 
