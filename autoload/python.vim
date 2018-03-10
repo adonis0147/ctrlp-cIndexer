@@ -1,7 +1,7 @@
 let s:plugin_path = escape(expand('<sfile>:p:h'), '\')
 
 function! python#Init()
-python << EOF
+exec python#PythonUntilEOF()
 import vim
 import os
 sys.path.insert(0, vim.eval('s:plugin_path'))
@@ -13,3 +13,10 @@ sys.path.pop(0)
 EOF
 endfunction
 
+function! python#PythonUntilEOF()
+	return python#UsePython3() ? 'python3 << EOF' : 'python << EOF'
+endfunction
+
+function! python#UsePython3()
+	return has('python3')
+endf
