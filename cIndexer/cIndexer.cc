@@ -66,12 +66,26 @@ static PyObject *Scan(PyObject *self, PyObject *args) {
 }
 
 static PyMethodDef cIndexerMethods[] = {
-	{"scan", Scan, METH_KEYWORDS, "indexer for ctrlp"},
+	{"scan", Scan, METH_VARARGS, "indexer for ctrlp"},
 	{NULL, NULL, 0, NULL},
 };
 
+#ifndef IS_PY3K
 PyMODINIT_FUNC
 initcIndexer(void) {
 	(void)Py_InitModule("cIndexer", cIndexerMethods);
 }
+#else
+static struct PyModuleDef cIndexerModule = {
+	PyModuleDef_HEAD_INIT,
+	"cIndexer",
+	NULL,
+	-1,
+	cIndexerMethods,
+};
 
+PyMODINIT_FUNC
+PyInit_cIndexer() {
+	return PyModule_Create(&cIndexerModule);
+}
+#endif

@@ -18,5 +18,9 @@ static PyObject *Scan(PyObject *self, PyObject *args);
 #define _DEBUG
 #endif
 
+#if PY_MAJOR_VERSION >= 3
+#define IS_PY3K
+#endif
+
 #endif
 
