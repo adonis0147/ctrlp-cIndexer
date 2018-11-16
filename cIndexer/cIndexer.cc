@@ -43,8 +43,8 @@ static std::vector<std::string> Scan(const std::string &root, const std::string 
 					}
 				}
 			}
+			closedir(dir);
 		}
-		closedir(dir);
 	}
 	return files;
 }
