@@ -9,7 +9,7 @@
 #include <sstream>
 
 #if _WIN32
-#include "dirent.h"
+#include "windows/dirent.h"
 #else
 #include <dirent.h>
 #endif
