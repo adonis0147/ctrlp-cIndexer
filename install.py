@@ -5,7 +5,8 @@ import os
 import glob
 import shutil
 
-os.system('cd cIndexer && python setup.py build')
+path = os.environ.get("PATH").replace(os.environ.get("HOME") + '/.rye/shims', '')
+os.system('PATH=%s cd cIndexer && python3 setup.py build' % path)
 
 extensions = ['*.so', '*.pyd', '*.dll']
 path = './cIndexer/build/*'
