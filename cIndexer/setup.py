@@ -1,5 +1,5 @@
 import sys
-from distutils.core import setup, Extension
+from setuptools import setup, Extension
 
 if sys.platform != 'win32':
     extra_compile_args = ['--std=c++11', '-Wno-write-strings']
